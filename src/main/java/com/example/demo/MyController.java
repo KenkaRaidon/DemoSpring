@@ -1,16 +1,24 @@
 package com.example.demo;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+
 
 @Controller
 public class MyController {
     @RequestMapping("/")
-    public ModelAndView index(){
-        ModelAndView modelAndView= new ModelAndView();
+    public String index(){
+        return "index";
+    }
+
+    @RequestMapping("/{place}")
+    public static String welcome(HttpServletRequest request, Model model, @PathVariable(value = "place") String place) {
         String demo="asasasaa";
-        modelAndView.addObject("demo", demo);
-        return modelAndView;
+        model.addAttribute("user", demo);
+        return place;
     }
 }
